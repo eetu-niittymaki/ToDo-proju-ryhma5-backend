@@ -5,9 +5,10 @@ const database = require('./database/cruderepository.js')
 const cors = require('cors')
 
 app.use('/locations', locations, cors())
+const port = process.env.PORT || 8080
 
 // Start server
-const server = app.listen(8080, async () => {
+const server = app.listen(port, async () => {
   try {
     await database.connect()
     console.log('Connection succesful')

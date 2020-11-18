@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-const config = require('./config.js')
+const config = require('./configTodo.js')
 
 const connection = mysql.createPool(config)
 
@@ -18,9 +18,9 @@ class ConnectionFunctions {
   static findAll () {
     return new Promise((resolve, reject) => {
       if (connection) {
-        connection.query('SELECT * FROM locations', (err, locations) => {
+        connection.query('SELECT * FROM todo', (err, task) => {
           if (err) throw (err)
-          resolve(locations)
+          resolve(task)
         })
       } else {
         reject(Error)
@@ -32,12 +32,12 @@ class ConnectionFunctions {
   static findById (id) {
     return new Promise((resolve, reject) => {
       if (connection) {
-        connection.query('SELECT * FROM locations WHERE id = ' + connection.escape(id), (err, locations) => {
+        connection.query('SELECT * FROM todo WHERE id = ' + connection.escape(id), (err, task) => {
           if (err) throw (err)
-          if (!locations.length) {
-            reject(`No location with id = ${id} `)
+          if (!task.length) {
+            reject(`No task with id = ${id} `)
           } else {
-            resolve(locations)
+            resolve(task)
           }
         })
       } else {
@@ -47,12 +47,12 @@ class ConnectionFunctions {
   }
 
   // Add new
-  static save (lat, lon) {
+  static save (task, priority, due_date) {
     return new Promise((resolve, reject) => {
       if (connection) {
-        const sql = `INSERT INTO locations (latitude, longitude) VALUES (${connection.escape(lat)}, ${connection.escape(lon)})`
+        const sql = `INSERT INTO todo (task, priority, due_date) VALUES (${connection.escape(task)}, ${connection.escape(priority)}, ${connection.escape(due_date)})`
         connection.query(sql, () => {
-          resolve(`Added location with latitude: ${lat} longitude: ${lon} `)
+          resolve(`Added new task `)
         })
       } else {
         reject(Error)
@@ -64,12 +64,12 @@ class ConnectionFunctions {
   static deleteById (id) {
     return new Promise((resolve, reject) => {
       if (connection) {
-        connection.query('DELETE FROM locations WHERE id = ' + connection.escape(id), (err, result) => {
+        connection.query('DELETE FROM todo WHERE id = ' + connection.escape(id), (err, result) => {
           if (err) throw (err)
           if (result.affectedRows === 0) {
-            reject(`No location with id = ${id} `)
+            reject(`No task with id = ${id} `)
           } else {
-            resolve(`Deleted row with id = ${id}`)
+            resolve(`Deleted task with id = ${id}`)
           }
         })
       } else {

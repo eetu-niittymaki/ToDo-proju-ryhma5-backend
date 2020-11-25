@@ -11,7 +11,7 @@ router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend
 })
 
 // Get all
-router.get('/', async (req, res) => {
+router.get('/todos/', async (req, res) => {
   try {
     await connection.findAll()
       .then((results) => res.status(200).send(results))
@@ -77,4 +77,4 @@ curl -i -X POST 'Content-type: application/json' -d '{\"task\": "Do something", 
 
 // curl -i -X DELETE http://localhost:8080/todos/
 
-// INSERT INTO todo (task, priority, due_date, is_done) VALUES ("Do something", 5, "2020-12-20", false)
+// INSERT INTO todo (task, priority, due_date, is_done) VALUES ("Finish this goddamn app.", 10, "2020-12-20", false)

@@ -4,7 +4,7 @@ const todos = require('./todosConnection.js')
 const database = require('./database/cruderepository.js')
 const cors = require('cors')
 
-app.use('/todos', todos, cors())
+app.use(todos, cors())
 const port = process.env.PORT || 8080
 
 // Start server

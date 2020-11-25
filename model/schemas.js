@@ -4,15 +4,10 @@ const schemas = {
       type: 'number',
       minimum: 1
     },
-    latitude: {
+    priority: {
       type: 'number',
-      minimum: -90,
-      maximum: 90
-    },
-    longitude: {
-      type: 'number',
-      minimum: -180,
-      maximum: 180
+      minimum: 1,
+      maximum: 10
     }
   }
 }

@@ -47,10 +47,11 @@ class ConnectionFunctions {
   }
 
   // Add new
-  static save (task, priority, due_date) {
+  static save (task, priority, due_date, is_done) {
     return new Promise((resolve, reject) => {
       if (connection) {
-        const sql = `INSERT INTO todo (task, priority, due_date) VALUES (${connection.escape(task)}, ${connection.escape(priority)}, ${connection.escape(due_date)})`
+        const sql = `INSERT INTO todo (task, priority, due_date) VALUES (${connection.escape(task)}, ${connection.escape(priority)}, 
+                      ${connection.escape(due_date)}, ${connection.escape(is_done)})`
         connection.query(sql, () => {
           resolve(`Added new task `)
         })

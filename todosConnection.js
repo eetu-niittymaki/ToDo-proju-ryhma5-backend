@@ -11,7 +11,7 @@ router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend
 })
 
 // Get all
-router.get('/todos', async (req, res) => {
+router.get('/todos/', async (req, res) => {
   try {
     await connection.findAll()
       .then((results) => res.status(200).send(results))
@@ -22,7 +22,7 @@ router.get('/todos', async (req, res) => {
 })
 
 // Get specific
-router.get('/:todos([0-9]+)', async (req, res) => {
+router.get('/todos/:todos([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
     validate(id, schemas.properties.id)
@@ -50,7 +50,7 @@ router.post('/todos/', async (req, res) => {
 })
 
 // Delete
-router.delete('/:todos([0-9]+)', async (req, res) => {
+router.delete('/todos/:todos([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
     validate(id, schemas.properties.id)

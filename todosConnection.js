@@ -11,7 +11,7 @@ router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend
 })
 
 // Get all
-router.get('/todos/', async (req, res) => {
+router.get('/todos', async (req, res) => {
   try {
     await connection.findAll()
       .then((results) => res.status(200).send(results))
@@ -35,11 +35,10 @@ router.get('/:todos([0-9]+)', async (req, res) => {
 })
 
 // Post
-router.post('/', async (req, res) => {
+router.post('/todos/', async (req, res) => {
   try {
     const task = req.body.task
     const priority = req.body.priority
-    validate(priority, schemas.properties.priority)
     const due_date = req.body.due_date
     const is_done = req.body.is_done
     await connection.save(task, priority, due_date, is_done)

@@ -34,7 +34,7 @@ router.get('/todos/:todos([0-9]+)', async (req, res) => {
   }
 })
 
-// Post
+// Post new
 router.post('/todos/', async (req, res) => {
   try {
     const task = req.body.task
@@ -48,6 +48,21 @@ router.post('/todos/', async (req, res) => {
     res.send(error)
   }
 })
+
+// UPDATE is_done
+router.put('/todos/:todos([0-9]+)', async (req, res) => {
+  try {
+    const id = Number(req.params.todos)
+    const method = req.params.is_done
+    validate(id, schemas.properties.id)
+    await connection.updateIsDone(id, method)
+      .then((results) => res.status(201).send(results))
+      .catch((err) => res.status(400).send(err))
+  } catch (error) {
+    res.send(error)
+  }
+})
+
 
 // Delete
 router.delete('/todos/:todos([0-9]+)', async (req, res) => {

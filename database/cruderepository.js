@@ -46,25 +46,6 @@ class ConnectionFunctions {
     })
   }
 
-  
-  static updateIsDone (id, method) {
-    return new Promise((resolve, reject) => {
-      if (connection) {
-        connection.query('UPDATE todo SET is_done = true' + ' WHERE id = ' + connection.escape(id), 
-        (err, task) => {
-          if (err) throw (err)
-          if (!task.length) {
-            reject(`No task with id = ${id} `)
-          } else {
-            resolve(task)
-          }
-        })
-      } else {
-        reject(Error)
-      }
-    })
-  }
-
   // Add new
   static save (task, priority, due_date, is_done) {
     return new Promise((resolve, reject) => {
@@ -73,6 +54,25 @@ class ConnectionFunctions {
                       ${connection.escape(due_date)}, ${connection.escape(is_done)})`
         connection.query(sql, () => {
           resolve(`Added new task `)
+        })
+      } else {
+        reject(Error)
+      }
+    })
+  }
+  
+  // UPDATE is_done true/false
+  static updateIsDone (id, boolean) {
+    return new Promise((resolve, reject) => {
+      if (connection) {
+        connection.query(`UPDATE todo SET is_done = ${connection.escape(boolean)} WHERE id = ${connection.escape(id)}`, 
+        (err, task) => {
+          if (err) throw (err)
+          if (!task.length) {
+            reject(`No task with id = ${id} `)
+          } else {
+            resolve(task)
+          }
         })
       } else {
         reject(Error)

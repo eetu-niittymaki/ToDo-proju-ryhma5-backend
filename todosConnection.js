@@ -49,20 +49,18 @@ router.post('/todos/', async (req, res) => {
   }
 })
 
-// UPDATE is_done
+// UPDATE is_done true/false
 router.put('/todos/:todos([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
-    const method = req.params.is_done
+    const boolean = req.body.is_done
     validate(id, schemas.properties.id)
-    await connection.updateIsDone(id, method)
+    await connection.updateIsDone(id, boolean)
       .then((results) => res.status(201).send(results))
-      .catch((err) => res.status(400).send(err))
   } catch (error) {
     res.send(error)
   }
 })
-
 
 // Delete
 router.delete('/todos/:todos([0-9]+)', async (req, res) => {
@@ -84,11 +82,3 @@ function validate (value, schema) {
 }
 
 module.exports = router
-
-/* 
-curl -i -X POST 'Content-type: application/json' -d '{\"task\": "Do something", \"priority\": 5, \"due_date\": "2020-12-20", \"is_done\": false}' http://localhost:8080/todos/              
-*/
-
-// curl -i -X DELETE http://localhost:8080/todos/
-
-// INSERT INTO todo (task, priority, due_date, is_done) VALUES ("Finish this goddamn app.", 10, "2020-12-20", false)

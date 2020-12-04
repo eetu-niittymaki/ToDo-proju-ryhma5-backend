@@ -21,6 +21,7 @@ class ConnectionFunctions {
         connection.query(`SELECT id, 
                                  task, 
                                  priority, 
+                                 (@timestamp := DATE(timestamp)) AS timestamp,
                                  (@due_date := DATE(due_date)) AS due_date, 
                                  is_done 
                           FROM todo`, 

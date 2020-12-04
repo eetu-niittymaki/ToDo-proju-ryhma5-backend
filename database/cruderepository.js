@@ -18,7 +18,13 @@ class ConnectionFunctions {
   static findAll () {
     return new Promise((resolve, reject) => {
       if (connection) {
-        connection.query('SELECT * FROM todo', (err, task) => {
+        connection.query(`SELECT id, 
+                                 task, 
+                                 priority, 
+                                 (@due_date := DATE(due_date)) AS due_date, 
+                                 is_done 
+                          FROM todo`, 
+                          (err, task) => {
           if (err) throw (err)
           resolve(task)
         })

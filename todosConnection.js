@@ -13,7 +13,9 @@ router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend
 // Get all
 router.get('/todos/', async (req, res) => {
   try {
-    await connection.findAll()
+    const sort = req.query.sort
+    const order_by = req.query.order_by
+    await connection.findAll(sort, order_by)
       .then((results) => res.status(200).send(results))
       .catch((err) => res.status(400).send(err))
   } catch (error) {

@@ -15,7 +15,7 @@ class ConnectionFunctions {
   }
 
   // Print all
-  static findAll () {
+  static findAll (sort, order_by) {
     return new Promise((resolve, reject) => {
       if (connection) {
         connection.query(`SELECT id, 
@@ -24,7 +24,8 @@ class ConnectionFunctions {
                                  (@timestamp := DATE(timestamp)) AS timestamp,
                                  (@due_date := DATE(due_date)) AS due_date, 
                                  is_done 
-                          FROM todo`, 
+                          FROM todo
+                          ORDER BY ${sort} ${order_by}`, 
                           (err, task) => {
           if (err) throw (err)
           resolve(task)

@@ -105,6 +105,23 @@ class ConnectionFunctions {
       }
     })
   }
+
+  static deleteCompleted () {
+    return new Promise((resolve, reject) => {
+      if (connection) {
+        connection.query('DELETE FROM todo WHERE is_done = 1', (err, result) => {
+          if (err) throw (err)
+          if (result.affectedRows === 0) {
+            reject(`No task to delete`)
+          } else {
+            resolve(`Deleted completed tasks`)
+          }
+        })
+      } else {
+        reject(Error)
+      }
+    })
+  }
 }
 
 module.exports = ConnectionFunctions

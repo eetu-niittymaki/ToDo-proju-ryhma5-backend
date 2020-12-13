@@ -79,6 +79,19 @@ router.delete('/todos/:todos([0-9]+)', async (req, res) => {
   }
 })
 
+// Delete completed
+router.delete('/todos/', async (req, res) => {
+  try {
+    await connection.deleteCompleted()
+      .then((results) => res.json({
+        msg: results
+      }))
+      .catch((err) => res.status(404).send(err))
+  } catch (error) {
+    console.log(error)
+  }
+})
+
 function validate (value, schema) {
   validator.validate(value, schema, { throwError: true })
 }

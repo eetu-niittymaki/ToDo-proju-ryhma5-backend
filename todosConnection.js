@@ -10,7 +10,7 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 })
 
 // Get all tasks
-router.get('/todos/', async (req, res) => {
+router.get('/api/', async (req, res) => {
   try {
     const task = req.query.task
     const sort = req.query.sort
@@ -24,7 +24,7 @@ router.get('/todos/', async (req, res) => {
 })
 
 // Get specific
-router.get('/todos/:todos([0-9]+)', async (req, res) => {
+router.get('/api/:api([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
     validate(id, schemas.properties.id)
@@ -37,7 +37,7 @@ router.get('/todos/:todos([0-9]+)', async (req, res) => {
 })
 
 // POST new task
-router.post('/todos/', async (req, res) => {
+router.post('/api/', async (req, res) => {
   try {
     const task = req.body.task
     const priority = req.body.priority
@@ -52,7 +52,7 @@ router.post('/todos/', async (req, res) => {
 })
 
 // UPDATE is_done true/false
-router.put('/todos/:todos([0-9]+)', async (req, res) => {
+router.put('/api/:api([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
     const boolean = req.body.is_done
@@ -65,7 +65,7 @@ router.put('/todos/:todos([0-9]+)', async (req, res) => {
 })
 
 // Delete task by ID 
-router.delete('/todos/:todos([0-9]+)', async (req, res) => {
+router.delete('/api/:api([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
     validate(id, schemas.properties.id)
@@ -80,7 +80,7 @@ router.delete('/todos/:todos([0-9]+)', async (req, res) => {
 })
 
 // Delete completed tasks
-router.delete('/todos/', async (req, res) => {
+router.delete('/api/', async (req, res) => {
   try {
     await connection.deleteCompleted()
       .then((results) => res.json({

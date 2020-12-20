@@ -14,7 +14,7 @@ class ConnectionFunctions {
     connection.end()
   }
 
-  // Print all
+  // GET all tasks
   static findAll (task, sort, order_by) {
     return new Promise((resolve, reject) => {
       if (connection) {
@@ -55,7 +55,7 @@ class ConnectionFunctions {
     })
   }
 
-  // Add new
+  // ADD new task
   static save (task, priority, due_date, is_done) {
     return new Promise((resolve, reject) => {
       if (connection) {
@@ -89,7 +89,7 @@ class ConnectionFunctions {
     })
   }
 
-  // Delete
+  // Delete specific task
   static deleteById (id) {
     return new Promise((resolve, reject) => {
       if (connection) {
@@ -107,6 +107,7 @@ class ConnectionFunctions {
     })
   }
 
+  // DELETED tasks marked as completed
   static deleteCompleted () {
     return new Promise((resolve, reject) => {
       if (connection) {

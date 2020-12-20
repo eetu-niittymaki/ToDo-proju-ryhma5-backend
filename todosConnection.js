@@ -10,7 +10,7 @@ router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend
   next()
 })
 
-// Get all
+// Get all tasks
 router.get('/todos/', async (req, res) => {
   try {
     const task = req.query.task
@@ -37,7 +37,7 @@ router.get('/todos/:todos([0-9]+)', async (req, res) => {
   }
 })
 
-// Post new
+// POST new task
 router.post('/todos/', async (req, res) => {
   try {
     const task = req.body.task
@@ -65,7 +65,7 @@ router.put('/todos/:todos([0-9]+)', async (req, res) => {
   }
 })
 
-// Delete
+// Delete task by ID 
 router.delete('/todos/:todos([0-9]+)', async (req, res) => {
   try {
     const id = Number(req.params.todos)
@@ -80,7 +80,7 @@ router.delete('/todos/:todos([0-9]+)', async (req, res) => {
   }
 })
 
-// Delete completed
+// Delete completed tasks
 router.delete('/todos/', async (req, res) => {
   try {
     await connection.deleteCompleted()

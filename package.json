@@ -1,5 +1,5 @@
 {
-  "name": "e01-e07",
+  "name": "todo-backend",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {

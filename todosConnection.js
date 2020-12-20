@@ -5,9 +5,8 @@ const schemas = require('./model/schemas.js')
 const connection = require('./database/cruderepository.js')
 const cors = require('cors')
 const router = express.Router()
-router.use(express.json(), cors(), express.static('./build'), (req, res, next) => {
+router.use(express.json(), cors(), express.static('./build'), (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
-  next()
 })
 
 // Get all tasks

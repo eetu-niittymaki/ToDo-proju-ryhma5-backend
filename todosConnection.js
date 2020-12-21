@@ -15,7 +15,7 @@ router.get('/api/', async (req, res) => {
     const task = req.query.task
     const sort = req.query.sort
     const order_by = req.query.order_by
-    let results = await connection.findAll(task, sort, order_by)
+    let results = await connection.findAll()
     res.status(200).send(results)
   } catch (error) {
     console.log(error)

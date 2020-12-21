@@ -12,7 +12,11 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 // Get all tasks
 router.get('/api/', async (req, res) => {
   try {
-    console.log('toimii')
+    const task = req.query.task
+    const sort = req.query.sort
+    const order_by = req.query.order_by
+    let results = await connection.findAll(task, sort, order_by)
+    res.status(200).send(results)
   } catch (error) {
     console.log(error)
   }

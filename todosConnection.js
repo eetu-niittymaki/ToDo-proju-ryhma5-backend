@@ -10,12 +10,12 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 })
 
 // Get all tasks
-router.get('/api/', async (req, res) => {
+router.get('/api/', (req, res) => {
   try {
     const task = req.query.task
     const sort = req.query.sort
     const order_by = req.query.order_by
-    await connection.findAll(task, sort, order_by)
+    connection.findAll(task, sort, order_by)
       .then((results) => res.status(200).send(results))
       .catch((err) => res.status(400).send(err))
   } catch (error) {

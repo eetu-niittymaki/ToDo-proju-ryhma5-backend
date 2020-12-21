@@ -10,14 +10,14 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 })
 
 // Get all tasks
-router.get('/api/', async (req, res) => {
+router.get('/api/', (req, res) => {
   try {
-    await res.status(200).send("toimii")
+    res.send("toimii")
   } catch (error) {
     console.log(error)
   }
 })
-
+/*
 // Get specific
 router.get('/api/:api([0-9]+)', async (req, res) => {
   try {
@@ -86,7 +86,7 @@ router.delete('/api/', async (req, res) => {
     console.log(error)
   }
 })
-
+*/
 function validate (value, schema) {
   validator.validate(value, schema, { throwError: true })
 }

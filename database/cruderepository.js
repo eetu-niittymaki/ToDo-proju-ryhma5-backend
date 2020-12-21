@@ -15,7 +15,7 @@ class ConnectionFunctions {
   }
 
   // GET all tasks
-  static findAll (task, sort, order_by) {
+  static findAll () {
     return new Promise((resolve, reject) => {
       if (connection) {
         connection.query(`SELECT id, 
@@ -24,9 +24,7 @@ class ConnectionFunctions {
                                  (@timestamp := DATE(timestamp)) AS timestamp,
                                  (@due_date := DATE(due_date)) AS due_date, 
                                  is_done 
-                          FROM todo
-                          WHERE task LIKE '%${task}%'
-                          ORDER BY ${sort} ${order_by}`, 
+                          FROM todo`, 
                           (err, task) => {
           if (err) throw (err)
           resolve(task)

@@ -10,7 +10,7 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 })
 
 // Get all tasks
-router.get('/', async (req, res) => {
+router.get('/api/', async (req, res) => {
   try {
     const task = req.query.task
     const sort = req.query.sort

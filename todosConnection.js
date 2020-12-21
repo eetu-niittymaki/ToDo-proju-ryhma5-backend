@@ -12,7 +12,7 @@ router.use(express.json(), cors(), express.static('./build'), (req, res) => {
 // Get all tasks
 router.get('/api/', async (req, res) => {
   try {
-    res.end('toimii')
+    console.log('toimii')
   } catch (error) {
     console.log(error)
   }

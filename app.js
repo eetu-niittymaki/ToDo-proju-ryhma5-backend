@@ -4,7 +4,7 @@ const todos = require('./todosConnection.js')
 const database = require('./database/cruderepository.js')
 const cors = require('cors')
 
-app.use(todos, cors(),  express.static('./build'), (req, res) => {
+app.use(todos, cors(),  express.static('build'), (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
 })
 const port = process.env.PORT || 8080

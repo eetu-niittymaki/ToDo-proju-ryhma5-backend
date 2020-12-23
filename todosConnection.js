@@ -10,7 +10,7 @@ router.use(express.json(), cors(), express.static('build'), (req, res) => {
 })
 
 // Get all tasks
-router.get('/api/', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const task = req.query.task
     const sort = req.query.sort
@@ -25,7 +25,7 @@ router.get('/api/', async (req, res) => {
 // Get specific
 router.get('/api/:api([0-9]+)', async (req, res) => {
   try {
-    const id = Number(req.params.todos)
+    const id = Number(req.params.api)
     validate(id, schemas.properties.id)
     await connection.findById(id)
       .then((results) => res.status(200).send(results))

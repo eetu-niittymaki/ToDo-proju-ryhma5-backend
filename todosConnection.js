@@ -5,12 +5,13 @@ const schemas = require('./model/schemas.js')
 const connection = require('./database/cruderepository.js')
 const cors = require('cors')
 const router = express.Router()
-router.use(express.json(), cors(), express.static('build'), (req, res) => {
+router.use(express.json(), cors(), express.static('build'), (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
+  next()
 })
 
 // Get all tasks
-router.get('/', async (req, res) => {
+router.get('/api/', async (req, res) => {
   try {
     const task = req.query.task
     const sort = req.query.sort
@@ -20,8 +21,8 @@ router.get('/', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-})
-/*
+}) 
+
 // Get specific
 router.get('/api/:api([0-9]+)', async (req, res) => {
   try {
@@ -90,7 +91,7 @@ router.delete('/api/', async (req, res) => {
     console.log(error)
   }
 })
-*/
+
 function validate (value, schema) {
   validator.validate(value, schema, { throwError: true })
 }

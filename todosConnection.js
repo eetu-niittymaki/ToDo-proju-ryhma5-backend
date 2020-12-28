@@ -5,7 +5,7 @@ const schemas = require('./model/schemas.js')
 const connection = require('./database/cruderepository.js')
 const cors = require('cors')
 const router = express.Router()
-router.use(express.json(), cors(), express.static('build'), (req, res, next) => {
+router.use(express.json(), cors(), express.static('../ToDo-proju-ryhma5-frontend-build'), (req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
   next()
 })

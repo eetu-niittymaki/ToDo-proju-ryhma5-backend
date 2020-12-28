@@ -77,8 +77,8 @@ class ConnectionFunctions {
         connection.query(`UPDATE todo SET is_done = ${connection.escape(boolean)} WHERE id = ${connection.escape(id)}`, 
         (err, task) => {
           if (err) throw (err)
-          if (!task.length) {
-            reject(`No task with id = ${id} `)
+          if (task.length) {
+            reject()
           } else {
             resolve(task)
           }
